@@ -10,9 +10,11 @@ says hello. It uses port 10000 by default.
 Implemented in C.
 
 Usage:
-`make
+```
+make
 ./helloserver
-./helloclient`
+./helloclient
+```
 
 ## hello_udp
 
@@ -22,9 +24,11 @@ hello to server. It uses port 10000 by default.
 Implemented in C.
 
 Usage:
-```make
+```
+make
 ./helloserver
-./helloclient```
+./helloclient
+```
 
 ## quote
 
@@ -33,9 +37,11 @@ A quote server/client implemented on top of TCP. Clients connects to server and 
 Implemented in Java.
 
 Usage:
-```javac QuoteServer.java QuoteClient.java
+```
+javac QuoteServer.java QuoteClient.java
 java QuoteServer
-java QuoteClient```
+java QuoteClient
+```
 
 ## Author
 
