@@ -1,5 +1,7 @@
-import java.net.*;
-import java.io.*;
+import java.net.InetSocketAddress;
+import java.net.Socket;
+import java.io.PrintWriter;
+import java.io.IOException;
 import java.util.Random;
 
 public class QuoteClient {
@@ -20,22 +22,43 @@ public class QuoteClient {
     public static void main(String[] args)
         throws IOException, InterruptedException
     {
+        // Create a socket
         Socket socket = new Socket();
+
+        // Create a random number source
         Random rnd = new Random();
+
         try {
+            // Connect to the localhost on PORT
             socket.connect(new InetSocketAddress("localhost", PORT));
+
+            // PrintWriter is a wrapper class to write lines to a stream
             PrintWriter out = new PrintWriter(socket.getOutputStream(), true);
+
+            // Pick a random number of quotes from 1 to 5
             int numQuotes = 1 + rnd.nextInt(4);
+
             System.out.println("Sending " + numQuotes + " random quotes to "
                 + "server.");
+
+            // While there are quotes to post
             while(numQuotes > 0) {
+                // Pick a random quote from the array
                 String randomQuote = quotes[rnd.nextInt(quotes.length)];
+
                 System.out.println("Sending random quote: " + randomQuote);
+
+                // Write quote to the socke
                 out.println(randomQuote);
+
+                // Wait for some random time between 0-3 secs
                 Thread.sleep(rnd.nextInt(3000));
+
+                // Reduce number of quotes left
                 numQuotes--;
             }
         } finally {
+            // Close the socket before leave
             socket.close();
         }
     }
