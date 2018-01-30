@@ -1,0 +1,6 @@
+*~
+*.swp
+*.swa
+**/helloserver
+**/helloclient
+**/*.class
