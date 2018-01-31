@@ -35,7 +35,8 @@ public class QuoteServer {
     }
 
     // run() function of this class will be called when above Thread has been
-    // started
+    // started since QuoteReceiver implements Runnable interface (This is a
+    // language feature.)
     private static class QuoteReceiver implements Runnable {
 
         // Socket of the client handled in this thread
@@ -51,8 +52,8 @@ public class QuoteServer {
             this.clientId = clientId;
         }
 
-        // This function is the entry point of the Thread, that is, it will be
-        // called when Thread started.
+        // This function is the entry point of the thread, that is, it will be
+        // called by the thread when thread's start() function is invoked.
         public void run()
         {
             try {
@@ -61,17 +62,21 @@ public class QuoteServer {
                 // I call a helper function to avoid handling of exceptions.
                 // This is not a good practice, but I did so to keep things
                 // simple.
+                // Don't do this in a real-life production environment. :)
                 realRun();
 
                 log("Thread finished.");
             } catch(Exception ex) {
                 log("Thread exception.");
 
+                // This part is used to report any exception raised by the
+                // thread.
                 Thread t = Thread.currentThread();
                 t.getUncaughtExceptionHandler().uncaughtException(t, ex);
             }
         }
 
+        // A helper function called by run()
         private void realRun() throws IOException
         {
             try {
