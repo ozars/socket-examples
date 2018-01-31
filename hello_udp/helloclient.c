@@ -11,33 +11,33 @@
 
 int main()
 {
-	int sockfd;
-	struct sockaddr_in server_addr;
-	unsigned int len;
-	char mesg[] = "HELLO";
-	int sent;
-	const int port = 10000;
+    int sockfd;
+    struct sockaddr_in server_addr;
+    unsigned int len;
+    char mesg[] = "HELLO";
+    int sent;
+    const int port = 10000;
 
     // Create socket
-	if((sockfd = socket(AF_INET, SOCK_DGRAM, 0)) == -1)
-	{
-	    perror("socket");
-		exit(-1);
-	}
+    if((sockfd = socket(AF_INET, SOCK_DGRAM, 0)) == -1)
+    {
+        perror("socket");
+        exit(-1);
+    }
 
     // Set server address options to be used in connect call
 
     // Address family type is AF_INET (i.e. Internet, IPv4)
-	server_addr.sin_family = AF_INET;
+    server_addr.sin_family = AF_INET;
 
     // Set port number (htons converts byte order for port to network order)
-	server_addr.sin_port = htons(port);
+    server_addr.sin_port = htons(port);
 
     // Connect to localhost IP
     server_addr.sin_addr.s_addr = inet_addr("127.0.0.1");
 
     // Set the rest to zero
-	memset(&server_addr.sin_zero, 0, sizeof(server_addr.sin_zero));
+    memset(&server_addr.sin_zero, 0, sizeof(server_addr.sin_zero));
 
     // Send message to server
     if((sent = sendto(sockfd, mesg, strlen(mesg), 0,
