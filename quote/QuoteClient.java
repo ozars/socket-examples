@@ -7,6 +7,7 @@ import java.util.Random;
 public class QuoteClient {
     public static final int PORT = 10000;
 
+    // Array of quotes
     private static String[] quotes = {
        "Knowledge comes, but wisdom lingers.",
        "A joke is a very serious thing.",
@@ -32,7 +33,8 @@ public class QuoteClient {
             // Connect to the localhost on PORT
             socket.connect(new InetSocketAddress("localhost", PORT));
 
-            // PrintWriter is a wrapper class to write lines to a stream
+            // PrintWriter is a wrapper class to print lines to a stream, in
+            // this case output stream of the socket.
             PrintWriter out = new PrintWriter(socket.getOutputStream(), true);
 
             // Pick a random number of quotes from 1 to 5
@@ -43,12 +45,13 @@ public class QuoteClient {
 
             // While there are quotes to post
             while(numQuotes > 0) {
+
                 // Pick a random quote from the array
                 String randomQuote = quotes[rnd.nextInt(quotes.length)];
 
                 System.out.println("Sending random quote: " + randomQuote);
 
-                // Write quote to the socke
+                // Write quote to the socket
                 out.println(randomQuote);
 
                 // Wait for some random time between 0-3 secs
