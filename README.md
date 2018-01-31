@@ -32,7 +32,13 @@ make
 
 ## quote
 
-A quote server/client implemented on top of TCP. Clients connects to server and sends random number of quotes.
+A quote server/client implemented on top of TCP. Clients connects to server and
+sends random number of quotes, waiting some time between sending successive
+quotes. This project uses [Runnable] to utilize threading to handle multiple
+clients connecting at the same time.
+
+Wait time (sleeping) between two quotes enables us to observe server's handling
+of multiple client inputs at the same time using threading.
 
 Implemented in Java.
 
@@ -42,6 +48,8 @@ javac QuoteServer.java QuoteClient.java
 java QuoteServer
 java QuoteClient
 ```
+
+[Runnable]: https://docs.oracle.com/javase/7/docs/api/java/lang/Runnable.html
 
 ## Author
 
